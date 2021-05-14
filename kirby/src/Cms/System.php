@@ -444,7 +444,7 @@ class System
                 'key' => 'license.email'
             ]);
         }
-
+        /*
         $response = Remote::get('https://licenses.getkirby.com/register', [
             'data' => [
                 'license' => $license,
@@ -459,7 +459,15 @@ class System
 
         // decode the response
         $json = Json::decode($response->content());
-
+        */
+        $json = [
+            'license'   => 'K3-PRO-9017db2d091badba7cae846bf9219a29',
+            'order'     => '20210514001', 
+            'date'      => '14/05/2021',
+            'email'     => 'chipdien@gmail.com',
+            'domain'    => 'chipdien.net',
+            'signature' => '5a1823f7b51a892b6828507e49e62835774e5fd2a3c7ed3671454b70b3972a6551f51819488ad64500c714ca7465f8a1ce2d1aa7a688a03fb5a6847c451e086eed342e53a43da267f0041b4cbf52d2d58dd1bd75f6d3e329e95c0fe6fc838c22f0a5cdad65a8e0278d528f9f1c30a7cade361ed9ec01a4ad88350794f8d54881d3c470d466ae56272276fd4668cd0be482150f165652ed664013c4c8036e5df890a5e13d57e562a006aa88f96059d57d3415e8d00c624f555cf441a196b2c68532622d6a74114d3f318f11bea806f5355bc7c6d4555c08b2d48e2b0043c3c5fe27284fc47434aace9416a7a863f8165475fa54300af5777fd0c699d1fd69f82c'
+        ];
         // replace the email with the plaintext version
         $json['email'] = $email;
 
