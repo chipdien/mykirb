@@ -1,44 +1,27 @@
 <?php
-
 /*
+  Snippets are a great way to store code snippets for reuse
+  or to keep your templates clean.
 
-The $flip parameter can be passed to the snippet to flip
-prev/next items visually:
+  The prevnext snippet renders the nice "keep on reading"
+  section below each article in the blog, to jump between
+  articles. It reuses the note snippet to render a full
+  excerpt of the article.
 
-```
-<?php snippet('prevnext', ['flip' => true]) ?>
-```
-
-Learn more about snippets and parameters at:
-https://getkirby.com/docs/templates/snippets
-
+  More about snippets:
+  https://getkirby.com/docs/guide/templates/snippets
 */
+?>
+<nav class="blog-prevnext">
+  <h2 class="h2">Keep on reading</h2>
 
-$directionPrev = @$flip ? 'right' : 'left';
-$directionNext = @$flip ? 'left'  : 'right';
-
-if($page->hasNextVisible() || $page->hasPrevVisible()): ?>
-  <nav class="pagination <?= !@$flip ?: ' flip' ?> wrap cf">
-
-    <?php if($page->hasPrevVisible()): ?>
-      <a class="pagination-item <?= $directionPrev ?>" href="<?= $page->prevVisible()->url() ?>" rel="prev" title="<?= $page->prevVisible()->title()->html() ?>">
-        <?= (new Asset("assets/images/arrow-{$directionPrev}.svg"))->content() ?>
-      </a>
-    <?php else: ?>
-      <span class="pagination-item <?= $directionPrev ?> is-inactive">
-        <?= (new Asset("assets/images/arrow-{$directionPrev}.svg"))->content() ?>
-      </span>
+  <div class="autogrid" style="--gutter: 1.5rem">
+    <?php if ($prev = $page->prevListed()): ?>
+    <?php snippet('note', ['note' => $prev, 'excerpt' => false])  ?>
     <?php endif ?>
 
-    <?php if($page->hasNextVisible()): ?>
-      <a class="pagination-item <?= $directionNext ?>" href="<?= $page->nextVisible()->url() ?>" rel="next" title="<?= $page->nextVisible()->title()->html() ?>">
-        <?= (new Asset("assets/images/arrow-{$directionNext}.svg"))->content() ?>
-      </a>
-    <?php else: ?>
-      <span class="pagination-item <?= $directionNext ?> is-inactive">
-        <?= (new Asset("assets/images/arrow-{$directionNext}.svg"))->content() ?>
-      </span>
+    <?php if ($next = $page->nextListed()): ?>
+    <?php snippet('note', ['note' => $next, 'excerpt' => false])  ?>
     <?php endif ?>
-
-  </nav>
-<?php endif ?>
+  </div>
+</nav>

@@ -1,25 +1,26 @@
-<?php if($pagination->hasPages()): ?>
-  <nav class="pagination wrap cf">
+<?php
+/*
+  Snippets are a great way to store code snippets for reuse
+  or to keep your templates clean.
 
-    <?php if($pagination->hasPrevPage()): ?>
-      <a class="pagination-item left" href="<?= $pagination->prevPageURL() ?>" rel="prev" title="newer articles">
-        <?= (new Asset("assets/images/arrow-left.svg"))->content() ?>
-      </a>
-    <?php else: ?>
-      <span class="pagination-item left is-inactive">
-        <?= (new Asset("assets/images/arrow-left.svg"))->content() ?>
-      </span>
-    <?php endif ?>
+  The pagination snippet renders prev/next links in the
+  blog, when articles spread across multiple pages
 
-    <?php if($pagination->hasNextPage()): ?>
-      <a class="pagination-item right" href="<?= $pagination->nextPageURL() ?>" rel="next" title="older articles">
-        <?= (new Asset("assets/images/arrow-right.svg"))->content() ?>
-      </a>
-    <?php else: ?>
-      <span class="pagination-item right is-inactive">
-        <?= (new Asset("assets/images/arrow-right.svg"))->content() ?>
-      </span>
-    <?php endif ?>
-
-  </nav>
+  More about snippets:
+  https://getkirby.com/docs/guide/templates/snippets
+*/
+?>
+<?php if ($pagination->hasPages()): ?>
+<nav class="pagination">
+  <?php if ($pagination->hasPrevPage()): ?>
+  <a class="pagination-prev" href="<?= $pagination->prevPageUrl() ?>">&larr;</a>
+  <?php else: ?>
+  <span class="pagination-prev">&larr;</span>
+  <?php endif ?>
+  <?php if ($pagination->hasNextPage()): ?>
+  <a class="pagination-next" href="<?= $pagination->nextPageUrl() ?>">&rarr;</a>
+  <?php else: ?>
+  <span class="pagination-next">&rarr;</span>
+  <?php endif ?>
+</nav>
 <?php endif ?>
